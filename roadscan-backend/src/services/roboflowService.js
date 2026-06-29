@@ -1,10 +1,10 @@
 import axios from 'axios'
 
 /**
- * Send an image URL to Roboflow for damage detection.
- * Returns { damageType, confidenceScore, predictions, raw }
+ * Send image buffer to Roboflow for damage detection.
+ * Roboflow serverless expects base64 encoded image.
  */
-export async function detectDamage(imageUrl) {
+export async function detectDamage(imageBuffer) {
   try {
     const modelUrl = process.env.ROBOFLOW_MODEL_URL
     const apiKey = process.env.ROBOFLOW_API_KEY
@@ -13,11 +13,14 @@ export async function detectDamage(imageUrl) {
       throw new Error('Roboflow not configured')
     }
 
+    // Convert buffer to base64
+    const base64Image = imageBuffer.toString('base64')
+
     const response = await axios({
       method: 'POST',
       url: `${modelUrl}?api_key=${apiKey}`,
-      data: { image: imageUrl },
-      headers: { 'Content-Type': 'application/json' },
+      data: base64Image,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       timeout: 15000,
     })
 
@@ -32,7 +35,7 @@ export async function detectDamage(imageUrl) {
       }
     }
 
-    // Take the highest confidence prediction as primary
+    // Take highest confidence prediction
     const top = predictions.reduce((a, b) =>
       a.confidence > b.confidence ? a : b
     )
@@ -44,7 +47,6 @@ export async function detectDamage(imageUrl) {
       raw: response.data,
     }
   } catch (err) {
-    // If Roboflow is down, throw a specific error the controller can catch
     if (err.code === 'ECONNABORTED' || err.response?.status >= 500) {
       const cvErr = new Error('CV service temporarily unavailable.')
       cvErr.code = 'CV_UNAVAILABLE'

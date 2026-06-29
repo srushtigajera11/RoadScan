@@ -1,13 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
-import dotenv from 'dotenv'
+import 'dotenv/config'
 import { connectDB } from './src/config/db.js'
 import authRoutes from './src/routes/authRoutes.js'
 import reportRoutes from './src/routes/reportRoutes.js'
 import { errorHandler } from './src/middleware/errorMiddleware.js'
 
-dotenv.config()
 
 const app = express()
 

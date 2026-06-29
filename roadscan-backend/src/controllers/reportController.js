@@ -34,7 +34,7 @@ export async function uploadReport(req, res, next) {
     let cvDown = false
 
     try {
-      const result = await detectDamage(imageUrl)
+      const result = await detectDamage(req.file.buffer)
       damageType = result.damageType
       confidenceScore = result.confidenceScore
       predictions = result.predictions
