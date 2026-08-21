@@ -106,8 +106,8 @@ export default function StepDetect({ capture, onComplete, onBack }) {
     return (
       <div className="flex flex-col items-center justify-center py-16 gap-4">
         <div className="w-12 h-12 border-2 border-orange-400 border-t-transparent rounded-full animate-spin" />
-        <div className="text-slate-400 text-sm">Analysing road damage...</div>
-        <div className="text-xs text-slate-600">Sending to CV model</div>
+        <div className="text-slate-600 dark:text-slate-400 text-sm">Analysing road damage...</div>
+        <div className="text-xs text-slate-400 dark:text-slate-600">Sending to CV model</div>
       </div>
     )
   }
@@ -116,11 +116,11 @@ export default function StepDetect({ capture, onComplete, onBack }) {
   if (error) {
     return (
       <div className="space-y-4">
-        <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-red-400 text-sm">
+        <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-red-600 dark:text-red-400 text-sm">
           {error}
         </div>
         <div className="flex gap-3">
-          <button onClick={onBack} className="flex-1 border border-slate-700 text-slate-300 py-3 rounded-xl text-sm">
+          <button onClick={onBack} className="flex-1 border border-slate-300 text-slate-700 dark:border-slate-700 dark:text-slate-300 py-3 rounded-xl text-sm">
             ← Back
           </button>
           <button onClick={runDetection} className="flex-1 bg-orange-500 text-white py-3 rounded-xl text-sm font-semibold">
@@ -135,16 +135,16 @@ export default function StepDetect({ capture, onComplete, onBack }) {
   if (cvDown) {
     return (
       <div className="space-y-4">
-        <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4 text-sm text-orange-300">
+        <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4 text-sm text-orange-700 dark:text-orange-300">
           ⚠️ AI detection is temporarily unavailable. Please select the damage type manually.
         </div>
         <img src={previewUrl} alt="Damage" className="w-full rounded-xl object-cover aspect-video" />
         <div>
-          <label className="text-xs text-slate-400 uppercase tracking-wide block mb-2">Damage Type</label>
+          <label className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide block mb-2">Damage Type</label>
           <select
             value={selectedDamage}
             onChange={(e) => setSelectedDamage(e.target.value)}
-            className="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-4 py-3 text-sm"
+            className="w-full bg-white border border-slate-300 text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-white rounded-xl px-4 py-3 text-sm"
           >
             {DAMAGE_TYPES.map((t) => (
               <option key={t} value={t}>{formatDamageType(t)}</option>
@@ -152,7 +152,7 @@ export default function StepDetect({ capture, onComplete, onBack }) {
           </select>
         </div>
         <div className="flex gap-3">
-          <button onClick={onBack} className="flex-1 border border-slate-700 text-slate-300 py-3 rounded-xl text-sm">← Back</button>
+          <button onClick={onBack} className="flex-1 border border-slate-300 text-slate-700 dark:border-slate-700 dark:text-slate-300 py-3 rounded-xl text-sm">← Back</button>
           <button onClick={proceed} className="flex-1 bg-orange-500 text-white py-3 rounded-xl text-sm font-semibold">Continue →</button>
         </div>
       </div>
@@ -173,29 +173,29 @@ export default function StepDetect({ capture, onComplete, onBack }) {
       </div>
 
       {/* Detection result card */}
-      <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4 space-y-3">
+      <div className="bg-slate-50 border border-slate-200 dark:bg-slate-800/50 dark:border-slate-700 rounded-xl p-4 space-y-3 transition-colors">
         <div className="flex items-center justify-between">
           <div>
-            <div className="text-xs text-slate-400 uppercase tracking-wide mb-0.5">AI Detection</div>
-            <div className="font-semibold text-white">{formatDamageType(selectedDamage)}</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-0.5">AI Detection</div>
+            <div className="font-semibold text-slate-900 dark:text-white">{formatDamageType(selectedDamage)}</div>
           </div>
           <div className="text-right">
-            <div className="text-xs text-slate-400 uppercase tracking-wide mb-0.5">Confidence</div>
-            <div className="font-semibold text-orange-400">{formatConfidence(result?.confidence)}</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-0.5">Confidence</div>
+            <div className="font-semibold text-orange-500 dark:text-orange-400">{formatConfidence(result?.confidence)}</div>
           </div>
         </div>
 
         {result?.address && (
-          <div className="border-t border-slate-700 pt-3">
-            <div className="text-xs text-slate-400 uppercase tracking-wide mb-0.5">📍 Location</div>
-            <div className="text-sm text-slate-300">{result.address}</div>
+          <div className="border-t border-slate-200 dark:border-slate-700 pt-3">
+            <div className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-0.5">📍 Location</div>
+            <div className="text-sm text-slate-700 dark:text-slate-300">{result.address}</div>
           </div>
         )}
       </div>
 
       {/* Override section */}
       <div>
-        <div className="text-xs text-slate-400 mb-2">Not right? Correct the damage type:</div>
+        <div className="text-xs text-slate-500 dark:text-slate-400 mb-2">Not right? Correct the damage type:</div>
         <div className="flex flex-wrap gap-2">
           {DAMAGE_TYPES.map((type) => (
             <button
@@ -204,7 +204,7 @@ export default function StepDetect({ capture, onComplete, onBack }) {
               className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
                 selectedDamage === type
                   ? 'bg-orange-500 border-orange-500 text-white'
-                  : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-500 hover:text-slate-200'
+                  : 'bg-white border-slate-300 text-slate-600 hover:border-slate-400 hover:text-slate-900 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-slate-200'
               }`}
             >
               {formatDamageType(type)}
@@ -212,13 +212,13 @@ export default function StepDetect({ capture, onComplete, onBack }) {
           ))}
         </div>
         {userOverrode && (
-          <p className="text-xs text-orange-400/70 mt-1.5">✓ You've overridden the AI classification</p>
+          <p className="text-xs text-orange-500/80 dark:text-orange-400/70 mt-1.5">✓ You've overridden the AI classification</p>
         )}
       </div>
 
       {/* Actions */}
       <div className="flex gap-3">
-        <button onClick={onBack} className="flex-1 border border-slate-700 hover:border-slate-500 text-slate-300 py-3 rounded-xl text-sm transition-colors">
+        <button onClick={onBack} className="flex-1 border border-slate-300 hover:border-slate-400 text-slate-700 dark:border-slate-700 dark:hover:border-slate-500 dark:text-slate-300 py-3 rounded-xl text-sm transition-colors">
           ← Back
         </button>
         <button onClick={proceed} className="flex-1 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl text-sm font-semibold transition-colors">

@@ -7,6 +7,12 @@
     <title>roadscan-frontend</title>
   </head>
   <body>
+    <script>
+      // Apply saved theme before first paint to avoid a flash (dark is default)
+      if ((localStorage.getItem('roadscan-theme') || 'dark') === 'dark') {
+        document.documentElement.classList.add('dark')
+      }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

@@ -31,8 +31,8 @@ export default function MyReportsPage() {
 
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-white">My Reports</h1>
-            <p className="text-slate-400 text-sm mt-0.5">{reports.length} total submission{reports.length !== 1 ? 's' : ''}</p>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">My Reports</h1>
+            <p className="text-slate-600 dark:text-slate-400 text-sm mt-0.5">{reports.length} total submission{reports.length !== 1 ? 's' : ''}</p>
           </div>
           <Link
             to="/report"
@@ -43,7 +43,7 @@ export default function MyReportsPage() {
         </div>
 
         {error && (
-          <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-red-400 text-sm mb-4">
+          <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-red-600 dark:text-red-400 text-sm mb-4">
             {error}
           </div>
         )}
@@ -51,7 +51,7 @@ export default function MyReportsPage() {
         {reports.length === 0 && !error && (
           <div className="text-center py-16">
             <div className="text-5xl mb-4">🛣️</div>
-            <p className="text-slate-400 mb-4">You haven't submitted any reports yet.</p>
+            <p className="text-slate-600 dark:text-slate-400 mb-4">You haven't submitted any reports yet.</p>
             <Link
               to="/report"
               className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl text-sm font-semibold transition-colors inline-block"
@@ -65,7 +65,7 @@ export default function MyReportsPage() {
           {reports.map((report) => (
             <div
               key={report._id}
-              className="bg-slate-800/30 border border-slate-700/50 hover:border-slate-600 rounded-xl overflow-hidden flex transition-colors"
+              className="bg-white border border-slate-200 shadow-sm hover:border-slate-300 dark:shadow-none dark:bg-slate-800/30 dark:border-slate-700/50 dark:hover:border-slate-600 rounded-xl overflow-hidden flex transition-colors"
             >
               {report.imageUrl && (
                 <img
@@ -77,8 +77,8 @@ export default function MyReportsPage() {
               <div className="flex-1 p-4 min-w-0">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
-                    <div className="font-mono text-sm font-bold text-orange-400">{report.trackingId}</div>
-                    <div className="font-medium text-white text-sm mt-0.5">{formatDamageType(report.damageType)}</div>
+                    <div className="font-mono text-sm font-bold text-orange-500 dark:text-orange-400">{report.trackingId}</div>
+                    <div className="font-medium text-slate-900 dark:text-white text-sm mt-0.5">{formatDamageType(report.damageType)}</div>
                     <div className="text-xs text-slate-500 mt-0.5 truncate">{report.address || 'Location unavailable'}</div>
                   </div>
                   <span className={`shrink-0 text-xs font-medium px-2.5 py-1 rounded-full whitespace-nowrap ${statusBadgeClass(report.status)}`}>
@@ -89,7 +89,7 @@ export default function MyReportsPage() {
                   <div className="text-xs text-slate-500">{formatDate(report.createdAt)}</div>
                   <Link
                     to={`/track?id=${report.trackingId}`}
-                    className="text-xs text-orange-400 hover:text-orange-300"
+                    className="text-xs text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300"
                   >
                     View details →
                   </Link>

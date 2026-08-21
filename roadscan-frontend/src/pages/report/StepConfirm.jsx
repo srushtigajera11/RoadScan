@@ -36,7 +36,7 @@ export default function StepConfirm({ capture, detection, onComplete, onBack }) 
     <div className="space-y-4">
 
       {/* Summary card */}
-      <div className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden">
+      <div className="bg-slate-50 border border-slate-200 dark:bg-slate-800/50 dark:border-slate-700 rounded-xl overflow-hidden transition-colors">
         <div className="flex gap-3 p-4">
           <img
             src={detection.imageUrl || capture.previewUrl}
@@ -45,17 +45,17 @@ export default function StepConfirm({ capture, detection, onComplete, onBack }) 
           />
           <div className="space-y-1.5 min-w-0">
             <div>
-              <div className="text-xs text-slate-400 uppercase tracking-wide">Damage Type</div>
-              <div className="font-semibold text-white">{formatDamageType(detection.damageType)}</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide">Damage Type</div>
+              <div className="font-semibold text-slate-900 dark:text-white">{formatDamageType(detection.damageType)}</div>
             </div>
             {detection.confidence && (
-              <div className="text-xs text-orange-400">
+              <div className="text-xs text-orange-500 dark:text-orange-400">
                 AI Confidence: {formatConfidence(detection.confidence)}
                 {detection.userOverrode && ' (manually corrected)'}
               </div>
             )}
             {detection.address && (
-              <div className="text-xs text-slate-400 truncate">{detection.address}</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400 truncate">{detection.address}</div>
             )}
             {capture.coords && (
               <div className="text-xs text-slate-500">
@@ -68,46 +68,46 @@ export default function StepConfirm({ capture, detection, onComplete, onBack }) 
 
       {/* Description */}
       <div>
-        <label className="text-xs text-slate-400 uppercase tracking-wide block mb-2">
-          Description <span className="normal-case text-slate-600">(optional)</span>
+        <label className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide block mb-2">
+          Description <span className="normal-case text-slate-400 dark:text-slate-600">(optional)</span>
         </label>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value.slice(0, maxChars))}
           placeholder="E.g. Large pothole near the school gate causing traffic slowdown..."
           rows={3}
-          className="w-full bg-slate-800 border border-slate-700 focus:border-orange-500 text-white rounded-xl px-4 py-3 text-sm outline-none resize-none placeholder:text-slate-600 transition-colors"
+          className="w-full bg-white border border-slate-300 focus:border-orange-500 text-slate-900 placeholder:text-slate-400 dark:bg-slate-800 dark:border-slate-700 dark:text-white dark:placeholder:text-slate-600 rounded-xl px-4 py-3 text-sm outline-none resize-none transition-colors"
         />
-        <div className={`text-right text-xs mt-1 ${charCount > maxChars * 0.9 ? 'text-orange-400' : 'text-slate-600'}`}>
+        <div className={`text-right text-xs mt-1 ${charCount > maxChars * 0.9 ? 'text-orange-500 dark:text-orange-400' : 'text-slate-400 dark:text-slate-600'}`}>
           {charCount}/{maxChars}
         </div>
       </div>
 
       {/* Email */}
       <div>
-        <label className="text-xs text-slate-400 uppercase tracking-wide block mb-2">
-          Email for tracking ID <span className="normal-case text-slate-600">(optional)</span>
+        <label className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide block mb-2">
+          Email for tracking ID <span className="normal-case text-slate-400 dark:text-slate-600">(optional)</span>
         </label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="w-full bg-slate-800 border border-slate-700 focus:border-orange-500 text-white rounded-xl px-4 py-3 text-sm outline-none placeholder:text-slate-600 transition-colors"
+          className="w-full bg-white border border-slate-300 focus:border-orange-500 text-slate-900 placeholder:text-slate-400 dark:bg-slate-800 dark:border-slate-700 dark:text-white dark:placeholder:text-slate-600 rounded-xl px-4 py-3 text-sm outline-none transition-colors"
         />
-        <p className="text-xs text-slate-600 mt-1">
+        <p className="text-xs text-slate-400 dark:text-slate-600 mt-1">
           We'll send you a tracking ID and PDF complaint receipt.
         </p>
       </div>
 
       {/* Info banner */}
-      <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-3 text-xs text-blue-300">
+      <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-3 text-xs text-blue-700 dark:text-blue-300">
         📄 A PDF complaint will be auto-generated and forwarded to Surat Municipal Corporation.
       </div>
 
       {/* Error */}
       {error && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-3 text-red-400 text-sm">
+        <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-3 text-red-600 dark:text-red-400 text-sm">
           {error}
         </div>
       )}
@@ -117,7 +117,7 @@ export default function StepConfirm({ capture, detection, onComplete, onBack }) 
         <button
           onClick={onBack}
           disabled={loading}
-          className="flex-1 border border-slate-700 hover:border-slate-500 text-slate-300 py-3 rounded-xl text-sm disabled:opacity-50 transition-colors"
+          className="flex-1 border border-slate-300 hover:border-slate-400 text-slate-700 dark:border-slate-700 dark:hover:border-slate-500 dark:text-slate-300 py-3 rounded-xl text-sm disabled:opacity-50 transition-colors"
         >
           ← Back
         </button>

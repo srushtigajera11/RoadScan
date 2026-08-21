@@ -136,16 +136,16 @@ export default function StepCapture({ onComplete }) {
     return (
       <div className="space-y-4">
         {/* Image preview */}
-        <div className="relative rounded-xl overflow-hidden bg-slate-800 aspect-[4/3]">
+        <div className="relative rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-800 aspect-[4/3]">
           <img src={previewUrl} alt="Captured" className="w-full h-full object-cover" />
         </div>
 
         {/* GPS status */}
-        <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-          <div className="text-xs text-slate-400 font-medium mb-2 uppercase tracking-wide">GPS Location</div>
+        <div className="bg-slate-50 border border-slate-200 dark:bg-slate-800/50 dark:border-slate-700 rounded-xl p-4 transition-colors">
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-medium mb-2 uppercase tracking-wide">GPS Location</div>
 
           {gpsLoading && (
-            <div className="flex items-center gap-2 text-slate-400 text-sm">
+            <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400 text-sm">
               <div className="w-4 h-4 border border-orange-400 border-t-transparent rounded-full animate-spin" />
               Detecting location...
             </div>
@@ -153,7 +153,7 @@ export default function StepCapture({ onComplete }) {
 
           {!gpsLoading && coords && (
             <div className="space-y-1">
-              <div className="flex items-center gap-2 text-green-400 text-sm font-medium">
+              <div className="flex items-center gap-2 text-green-600 dark:text-green-400 text-sm font-medium">
                 <span>✓</span>
                 <span>
                   {coords.lat.toFixed(5)}, {coords.lng.toFixed(5)}
@@ -167,10 +167,10 @@ export default function StepCapture({ onComplete }) {
 
           {!gpsLoading && gpsError && (
             <div className="space-y-2">
-              <p className="text-sm text-red-400">{gpsError}</p>
+              <p className="text-sm text-red-600 dark:text-red-400">{gpsError}</p>
               <button
                 onClick={retryBrowserGps}
-                className="text-xs text-orange-400 hover:text-orange-300 underline"
+                className="text-xs text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 underline"
               >
                 Retry GPS
               </button>
@@ -185,7 +185,7 @@ export default function StepCapture({ onComplete }) {
         <div className="flex gap-3">
           <button
             onClick={reset}
-            className="flex-1 border border-slate-700 hover:border-slate-500 text-slate-300 py-3 rounded-xl text-sm font-medium transition-colors"
+            className="flex-1 border border-slate-300 hover:border-slate-400 text-slate-700 dark:border-slate-700 dark:hover:border-slate-500 dark:text-slate-300 py-3 rounded-xl text-sm font-medium transition-colors"
           >
             Retake
           </button>
@@ -204,36 +204,36 @@ export default function StepCapture({ onComplete }) {
   // Default: choose mode
   return (
     <div className="space-y-4">
-      <p className="text-slate-400 text-sm text-center">
+      <p className="text-slate-600 dark:text-slate-400 text-sm text-center">
         Take or upload a photo of the road damage.
       </p>
 
       <button
         onClick={() => setMode('camera')}
-        className="w-full flex items-center gap-4 bg-slate-800/50 hover:bg-slate-800 border border-slate-700 hover:border-orange-500/50 text-left rounded-xl p-5 transition-all group"
+        className="w-full flex items-center gap-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-orange-500/50 dark:bg-slate-800/50 dark:hover:bg-slate-800 dark:border-slate-700 dark:hover:border-orange-500/50 text-left rounded-xl p-5 transition-all group"
       >
-        <div className="w-12 h-12 rounded-lg bg-orange-500/10 text-orange-400 flex items-center justify-center text-2xl group-hover:bg-orange-500/20 transition-colors">
+        <div className="w-12 h-12 rounded-lg bg-orange-500/10 text-orange-500 dark:text-orange-400 flex items-center justify-center text-2xl group-hover:bg-orange-500/20 transition-colors">
           📷
         </div>
         <div>
-          <div className="font-semibold text-white">Take a Photo</div>
-          <div className="text-sm text-slate-400">Use your device camera</div>
+          <div className="font-semibold text-slate-900 dark:text-white">Take a Photo</div>
+          <div className="text-sm text-slate-600 dark:text-slate-400">Use your device camera</div>
         </div>
-        <div className="ml-auto text-slate-600">›</div>
+        <div className="ml-auto text-slate-400 dark:text-slate-600">›</div>
       </button>
 
       <button
         onClick={() => fileInputRef.current.click()}
-        className="w-full flex items-center gap-4 bg-slate-800/50 hover:bg-slate-800 border border-slate-700 hover:border-orange-500/50 text-left rounded-xl p-5 transition-all group"
+        className="w-full flex items-center gap-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-orange-500/50 dark:bg-slate-800/50 dark:hover:bg-slate-800 dark:border-slate-700 dark:hover:border-orange-500/50 text-left rounded-xl p-5 transition-all group"
       >
-        <div className="w-12 h-12 rounded-lg bg-slate-700 flex items-center justify-center text-2xl group-hover:bg-slate-600 transition-colors">
+        <div className="w-12 h-12 rounded-lg bg-slate-200 group-hover:bg-slate-300 dark:bg-slate-700 dark:group-hover:bg-slate-600 flex items-center justify-center text-2xl transition-colors">
           🖼️
         </div>
         <div>
-          <div className="font-semibold text-white">Upload from Gallery</div>
-          <div className="text-sm text-slate-400">JPEG, PNG or WEBP — max 10MB</div>
+          <div className="font-semibold text-slate-900 dark:text-white">Upload from Gallery</div>
+          <div className="text-sm text-slate-600 dark:text-slate-400">JPEG, PNG or WEBP — max 10MB</div>
         </div>
-        <div className="ml-auto text-slate-600">›</div>
+        <div className="ml-auto text-slate-400 dark:text-slate-600">›</div>
       </button>
 
       <input

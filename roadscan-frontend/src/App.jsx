@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
+import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -13,9 +14,10 @@ import DashboardPage from './pages/DashboardPage'
 
 export default function App() {
   return (
+    <ThemeProvider>
     <AuthProvider>
       <BrowserRouter>
-        <div className="min-h-screen bg-slate-950">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
           <Navbar />
           <main>
             <Routes>
@@ -50,5 +52,6 @@ export default function App() {
         </div>
       </BrowserRouter>
     </AuthProvider>
+    </ThemeProvider>
   )
 }

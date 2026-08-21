@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '../api/authApi'
 import { useAuth } from '../context/AuthContext'
 
+const inputClass =
+  'w-full bg-white border border-slate-300 focus:border-orange-500 text-slate-900 placeholder:text-slate-400 dark:bg-slate-800 dark:border-slate-700 dark:text-white dark:placeholder:text-slate-600 rounded-xl px-4 py-3 text-sm outline-none transition-colors'
+
 export default function LoginPage() {
   const { login } = useAuth()
   const navigate = useNavigate()
@@ -38,13 +41,13 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-white">Welcome back</h1>
-          <p className="text-slate-400 text-sm mt-1">Sign in to your RoadScan account</p>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Welcome back</h1>
+          <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">Sign in to your RoadScan account</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="bg-white border border-slate-200 shadow-sm dark:shadow-none dark:bg-slate-900/50 dark:border-slate-800 rounded-2xl p-6 space-y-4 transition-colors">
           <div>
-            <label className="text-xs text-slate-400 uppercase tracking-wide block mb-1.5">Email</label>
+            <label className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide block mb-1.5">Email</label>
             <input
               type="email"
               name="email"
@@ -52,13 +55,13 @@ export default function LoginPage() {
               onChange={handleChange}
               required
               autoComplete="email"
-              className="w-full bg-slate-800 border border-slate-700 focus:border-orange-500 text-white rounded-xl px-4 py-3 text-sm outline-none placeholder:text-slate-600 transition-colors"
+              className={inputClass}
               placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label className="text-xs text-slate-400 uppercase tracking-wide block mb-1.5">Password</label>
+            <label className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wide block mb-1.5">Password</label>
             <input
               type="password"
               name="password"
@@ -66,13 +69,13 @@ export default function LoginPage() {
               onChange={handleChange}
               required
               autoComplete="current-password"
-              className="w-full bg-slate-800 border border-slate-700 focus:border-orange-500 text-white rounded-xl px-4 py-3 text-sm outline-none placeholder:text-slate-600 transition-colors"
+              className={inputClass}
               placeholder="••••••••"
             />
           </div>
 
           {error && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-3 text-red-400 text-sm">
+            <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-3 text-red-600 dark:text-red-400 text-sm">
               {error}
             </div>
           )}
@@ -89,7 +92,7 @@ export default function LoginPage() {
 
           <p className="text-center text-sm text-slate-500">
             No account?{' '}
-            <Link to="/register" className="text-orange-400 hover:text-orange-300">
+            <Link to="/register" className="text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300">
               Register
             </Link>
           </p>

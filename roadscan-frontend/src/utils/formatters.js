@@ -18,11 +18,11 @@ export function formatDate(dateStr) {
  */
 export function statusBadgeClass(status) {
   const map = {
-    open: 'bg-red-500/20 text-red-400 border border-red-500/30',
-    in_progress: 'bg-orange-500/20 text-orange-400 border border-orange-500/30',
-    resolved: 'bg-green-500/20 text-green-400 border border-green-500/30',
+    open: 'bg-red-500/10 text-red-600 dark:bg-red-500/20 dark:text-red-400 border border-red-500/30',
+    in_progress: 'bg-orange-500/10 text-orange-600 dark:bg-orange-500/20 dark:text-orange-400 border border-orange-500/30',
+    resolved: 'bg-green-500/10 text-green-700 dark:bg-green-500/20 dark:text-green-400 border border-green-500/30',
   }
-  return map[status] || 'bg-slate-500/20 text-slate-400 border border-slate-500/30'
+  return map[status] || 'bg-slate-500/10 text-slate-600 dark:bg-slate-500/20 dark:text-slate-400 border border-slate-500/30'
 }
 
 /**
